@@ -16,7 +16,8 @@ class Platformer extends Phaser.Scene {
     create() {
         // Create a new tilemap game object which uses 18x18 pixel tiles, and is
         // 45 tiles wide and 25 tiles tall.
-        this.map = this.add.tilemap("platformer-level-1", 18, 18, 45, 25);
+        this.physics.world.setBounds(0,0,2700,550);
+        this.map = this.add.tilemap("platformer-level-1", 18, 18, 150, 25);
 
         // Add a tileset to the map
         // First parameter: name we gave the tileset in Tiled
@@ -27,17 +28,32 @@ class Platformer extends Phaser.Scene {
         // Create a layer
         this.groundLayer = this.map.createLayer("Ground-n-Platforms", this.tileset, 0, 0);
         this.bgLayer=this.map.createLayer("Background", this.bgset, 0, 0);
-
+        this.bgLayer.setDepth(-1);
         // Make it collidable
+        this.groundLayer.setDepth(0);
         this.groundLayer.setCollisionByProperty({
             collides: true
         });
+        // Find coins in the "Objects" layer in Phaser
+        // Look for them by finding objects with the name "coin"
+        // Assign the coin texture from the tilemap_sheet sprite sheet
+        // Phaser docs:
+        // https://newdocs.phaser.io/docs/3.80.0/focus/Phaser.Tilemaps.Tilemap-createFromObjects
 
-        // TODO: Add createFromObjects here
-        
-
+        this.coins = this.map.createFromObjects("Objects", {
+            name: "coin",
+            key: "tilemap_sheet",
+            frame: 151
+        });
         // TODO: Add turn into Arcade Physics here
-        
+  // Since createFromObjects returns an array of regular Sprites, we need to convert 
+        // them into Arcade Physics sprites (STATIC_BODY, so they don't move) 
+        this.physics.world.enable(this.coins, Phaser.Physics.Arcade.STATIC_BODY);
+
+        // Create a Phaser group out of the array this.coins
+        // This will be used for collision detection below.
+        this.coinGroup = this.add.group(this.coins);
+
 
         // set up player avatar
         my.sprite.player = this.physics.add.sprite(30, 345, "platformer_characters", "tile_0000.png");
@@ -48,7 +64,10 @@ class Platformer extends Phaser.Scene {
 
         // TODO: Add coin collision handler
         
-
+        // Handle collision detection with coins
+        this.physics.add.overlap(my.sprite.player, this.coinGroup, (obj1, obj2) => {
+            obj2.destroy(); // remove coin on overlap
+        });
         // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
 
@@ -66,7 +85,7 @@ class Platformer extends Phaser.Scene {
             // TODO: Try: add random: true
             scale: {start: 0.03, end: 0.1},
             // TODO: Try: maxAliveParticles: 8,
-            lifespan: 350,
+            lifespan: 300,
             // TODO: Try: gravityY: -400,
             alpha: {start: 1, end: 0.1}, 
         });
