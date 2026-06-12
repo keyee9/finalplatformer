@@ -1042,6 +1042,19 @@
          "tilecount":40,
          "tileheight":18,
          "tilewidth":18
+        }, 
+        {
+         "columns":16,
+         "firstgid":221,
+         "image":"tilemap_packed_candy.png",
+         "imageheight":126,
+         "imagewidth":288,
+         "margin":0,
+         "name":"kenny_tilemap_packed_candy",
+         "spacing":0,
+         "tilecount":112,
+         "tileheight":18,
+         "tilewidth":18
         }],
  "tilewidth":18,
  "type":"map",

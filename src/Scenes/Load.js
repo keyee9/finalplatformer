@@ -6,18 +6,15 @@ class Load extends Phaser.Scene {
     preload() {
         this.load.setPath("./assets/");
 
-        // Load characters spritesheet
+        // Characters spritesheet
         this.load.atlas("platformer_characters", "tilemap-characters-packed.png", "tilemap-characters-packed.json");
-        
-
+        // Audio   
         this.load.audio("bgm", "bgm.mp3");
         this.load.audio("coinsfx", "coin.mp3");
         this.load.audio("jumpsfx", "jump.mp3");
         this.load.audio("deathsfx", "timeskip.mp3");
         this.load.audio("revivesfx", "rbd.mp3");
 
-
-        
         // Load tilemap information
         this.load.image("tilemap_tiles", "tilemap_packed.png");   
         this.load.image("bgmap_tiles", "tilemap-backgrounds_packed.png");                      // Packed tilemap
