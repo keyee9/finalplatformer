@@ -14,7 +14,11 @@ class Load extends Phaser.Scene {
         this.load.audio("jumpsfx", "jump.mp3");
         this.load.audio("deathsfx", "timeskip.mp3");
         this.load.audio("revivesfx", "rbd.mp3");
+        this.load.audio("levernotif", "levernotif.mp3");
+        this.load.audio("levelnotif", "levelnotif.mp3");
+        this.load.audio("switch", "switch.mp3");
 
+        this.load.image("movingplatform","movingplatform.png");
         // Load tilemap information
         this.load.image("tilemap_tiles", "tilemap_packed.png");   
         this.load.image("bgmap_tiles", "tilemap-backgrounds_packed.png");                      // Packed tilemap
