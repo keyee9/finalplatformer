@@ -20,7 +20,7 @@ class WinScreen extends Phaser.Scene {
         let centerY = this.sys.game.config.height / 2;
  this.bg2 = this.add.image(centerX / 2, centerY / 2, '2');
         this.bg2.setDisplaySize(centerX*3.4,centerY*3);
-        // 1. GAME OVER HEADER TEXT
+        
         this.add.text(centerX-180, centerY+300 , "WINNER", {
             fontSize: "100px",
             color: "#d3cf05",

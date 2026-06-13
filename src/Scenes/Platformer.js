@@ -65,7 +65,7 @@ class Platformer extends Phaser.Scene {
         this.leversTouched = 0;
         this.invincible = false;
         this.hasKey = false;
-//Water
+// Water
 
         this.water = this.map.createFromObjects("Objects", {
             name: "water",
@@ -205,9 +205,10 @@ class Platformer extends Phaser.Scene {
 
 
         });
-    
+        // Player X LevelChceckerCollisions
         this.check1collider=this.physics.add.collider(my.sprite.player, this.check1);
         this.check2collider=this.physics.add.collider(my.sprite.player, this.check2);
+        // Platform and Player smoothness
         this.physics.add.collider(my.sprite.player, this.movingPlatform, this.matchPlatformVelocity, null, this);
 
 
@@ -308,11 +309,11 @@ class Platformer extends Phaser.Scene {
     checkBorder(){
         if (this.coinCount >=5){ 
             if (this.check1collider && this.check1collider.world) {
-            this.check1collider.destroy();
+            this.check1collider.destroy(); //Pointer Gone
             this.sound.play('levelnotif', { volume: 0.6 });
             this.check1collider = null; 
         }
-            this.check1.forEachTile(tile => {
+            this.check1.forEachTile(tile => { // Physical Border Removed
             this.check1.removeTileAt(tile.x, tile.y);
         });
     }
@@ -349,7 +350,7 @@ class Platformer extends Phaser.Scene {
     }
 
     handlePlatformMovement(){
-         let startX = this.platformStartX;
+    let startX = this.platformStartX;
     let range = 100;
 
     if (this.movingPlatform.x >= startX + range) {
@@ -362,23 +363,20 @@ class Platformer extends Phaser.Scene {
     handleLeverCheckpoint(){
         if (!this.invincible && this.leversTouched === 3) {
                 this.invincible = true;
-                                this.sound.play("levernotif", {
-           volume: 0.5 
-            });
+                this.sound.play("levernotif", {
+                volume: 0.5 
+                });
 
                 console.log("You can't die now!");
             }
     }
 
     update() {
-
         this.handleMovement();
         this.checkBorder();
         this.handleJumping();
         this.handlePlatformMovement();
         this.handleLeverCheckpoint();
-
-   
 }
 
 }
