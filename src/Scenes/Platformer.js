@@ -11,7 +11,6 @@ class Platformer extends Phaser.Scene {
         this.JUMP_VELOCITY = -600;
         this.PARTICLE_VELOCITY = 0;
         this.SCALE = 2.0;
-        this.firstlevel=true;
         this.maxJumps = 2;  
         this.jumpsLeft = 0;
         this.coinCount = 0;
@@ -267,7 +266,7 @@ class Platformer extends Phaser.Scene {
         this.inputKeys();
         this.debug();
 
-        this.bgMusic  = this.sound.add('bgm',  { volume: 0.3, loop: true });
+        this.bgMusic  = this.sound.add('bgm',  { volume: 0.2, loop: true });
         this.bgMusic.play();
     }
 
@@ -309,6 +308,7 @@ class Platformer extends Phaser.Scene {
         if (this.coinCount >=5){ 
             if (this.check1collider && this.check1collider.world) {
             this.check1collider.destroy();
+            this.sound.play('levelnotif', { volume: 0.6 });
             this.check1collider = null; 
         }
             this.check1.forEachTile(tile => {
@@ -318,6 +318,7 @@ class Platformer extends Phaser.Scene {
         if (this.coinCount >=10){
             if (this.check2collider && this.check2collider.world) {
                 this.check2collider.destroy();
+                this.sound.play('jumpsfx', { volume: 0.3 });
                 this.check2collider = null; 
             }
             this.check2.forEachTile(tile => {
