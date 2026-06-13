@@ -63,7 +63,7 @@ class Platformer extends Phaser.Scene {
     this.leverGroup = this.add.group(this.lever1);
 
         this.leversTouched = 0;
-        this.invincible = false;;
+        this.invincible = false;
         this.hasKey = false;
 //Water
 
@@ -158,6 +158,7 @@ class Platformer extends Phaser.Scene {
         if (this.coinCount >=15) {
             this.physics.add.collider(my.sprite.player, this.doorlayer, () => {
             this.bgMusic.stop();
+            this.sound.play("win");
             this.scene.start("winScreen", { score: this.coinCount }); 
         });
     }
@@ -174,6 +175,7 @@ class Platformer extends Phaser.Scene {
         //Secret Door
         this.physics.add.collider(my.sprite.player, this.sdoorlayer, () => {
             this.bgMusic.stop();
+            this.sound.play("win");
             this.scene.start("winScreen", { score: this.coinCount }); 
         });
 
