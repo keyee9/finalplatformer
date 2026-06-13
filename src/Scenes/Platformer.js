@@ -63,7 +63,7 @@ class Platformer extends Phaser.Scene {
     this.leverGroup = this.add.group(this.lever1);
 
         this.leversTouched = 0;
-        this.invincible = true;
+        this.invincible = false;;
         this.hasKey = false;
 //Water
 
@@ -245,7 +245,6 @@ class Platformer extends Phaser.Scene {
 
     }
     inputKeys(){
-        this.rKey = this.input.keyboard.addKey('R');
         this.dKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.aKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.wKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -344,10 +343,7 @@ class Platformer extends Phaser.Scene {
             6
         );
     }
-    if(Phaser.Input.Keyboard.JustDown(this.rKey)) {
-        this.bgMusic.stop();
-        this.scene.start("gameOver", { score: this.coinCount    });  
-        }
+
     }
 
     handlePlatformMovement(){
